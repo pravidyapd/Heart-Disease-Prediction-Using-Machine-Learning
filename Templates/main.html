@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<style type="text/css">
+    body {
+        background-image: url("dil.jpeg"); 
+        background-size: cover; 
+        background-repeat: no-repeat; 
+    }
+    p{
+        color:red;
+        text-align:center;
+    }
+</style>
+</head>
+
+<body>
+    <h1>Heart disease prediction application</h1>
+    
+    <h1>
+        {% comment %} {% for num in data %}
+{{num}}
+   
+{% endfor %}<h1>
+    <hr> {% endcomment %}
+    {% comment %} <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav> {% endcomment %}
+
+    <div class="container">
+        <form action="{% url 'result' %}" method="post">
+            {% csrf_token %}
+        <div class="row">
+                <div class="col-md-3">
+                    <label for="exampleFormControlInput1" class="form-label" style="font-size: 25px;">age</label>
+                    <input type="number" name="age" class="form-control" id="exampleFormControlInput1" placeholder="numericals">
+                </div>
+            <div class="col-md-3 ">
+                <label for="exampleFormControlInput1" class="form-label" style="font-size: 25px;" >sex</label>
+                <select class="form-select" name="sex" aria-label="Default select example">
+
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+
+                </select>
+            </div>
+            
+            
+            <div class="col-md-3">
+
+                <label for="exampleFormControlInput1" class="form-label" style="font-size: 25px;">Chest Pain</label>
+                <select class="form-select" name="cp" aria-label="Default select example">
+
+                    <option value="0">Typical angina</option>
+                    <option value="1">A-typical angina</option>
+                    <option value="2">non-anginal pain</option>
+                    <option value="3">asymptomatic</option>
+
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="exampleFormControlInput1" class="form-label" style="font-size: 25px;">blood pressure</label>
+                <input type="number" name="trestbps" class="form-control" id="exampleFormControlInput1" placeholder="100 to 150">
+            </div>
+            <div class="col-md-3">
+                <label for="exampleFormControlInput1" class="form-label" style="font-size: 25px;" >cholesterol level</label>
+                <input type="number" name="chol" class="form-control" id="exampleFormControlInput1" placeholder="100 to 500">
+            </div>
+            <div class="col-md-3">
+                <label for="exampleFormControlInput1" class="form-label" style="font-size: 25px;" >RBS above 120</label>
+                    <!-- <label for="exampleFormControlInput1" class="form-label">Female</label> -->
+                    <select class="form-select" name="fbs" aria-label="Default select example">
+
+                        <option value="1">true</option>
+                        <option value="0">false</option>
+
+                    </select>
+            </div>
+            <div class="col-md-3">
+                <label for="exampleFormControlInput1" class="form-label"style="font-size: 25px;" >resting ECG result</label>
+                <select class="form-select" name="restecg" aria-label="Default select example">
+
+                    <option value="0">low</option>
+                    <option value="1">normal</option>
+                    <option value="2">high</option>
+
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="exampleFormControlInput1" class="form-label"style="font-size: 25px;" > maximum heart rate</label>
+                <input type="number" name="thalach" class="form-control" id="exampleFormControlInput1" placeholder="70 to 200">
+        
+            </div>
+            <!-- <div class="col-md-3">
+                <label for="exampleFormControlInput1" class="form-label"> exercise-induced angina</label>
+                <select class="form-select" name="ca" aria-label="Default select example">
+
+                    <option value="1">yes</option>
+                    <option value="0">no</option>
+
+                </select>
+            </div> -->
+            <!-- <div class="col-md-3">
+                <label for="exampleFormControlInput1" class="form-label">ST depression</label>
+                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class="col-md-3">
+                <label for="exampleFormControlInput1" class="form-label">slope of the peak</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class="col-md-3">
+                <label for="exampleFormControlInput1" class="form-label">fluoroscopy</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div> -->
+            <div class="col-md-3">
+
+                <label for="exampleFormControlInput1" class="form-label"style="font-size: 25px;" >Coronary artery </label>
+                <select class="form-select" name="ca" aria-label="Default select example">
+
+                    <option value="0">NO Coronary Artery blockage </option>
+                    <option value="1">1 Coronary Artery blockage </option>
+                    <option value="2">2 Coronary Artery blockage</option>
+                    <option value="3">3 Coronary Artery blockage</option>
+                    <option value="4">4 Coronary Artery blockage</option>
+
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="exampleFormControlInput1" class="form-label"style="font-size: 25px;" >thalassemia</label>
+                <select class="form-select" name="thal" aria-label="Default select example">
+
+                    <option value="0">HA1</option>
+                    <option value="1">HA2</option>
+                    <option value="2">HB1</option>
+                    <option value="3">HB2</option>
+
+                </select>
+            </div>
+        
+
+
+
+        </div>
+    <button class="btn btn-block btn-success mt-2" type="submit"style="font-size: 25px;">submit</button>
+</form>
+    </div>
+
+</body>
+
+</html>
